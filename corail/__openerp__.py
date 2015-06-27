@@ -9,8 +9,15 @@
     CORAIL Service
     """,
     'website': '',
-    'depends' : [],
+    'depends' : ['mail'],
     'data': [
+             'security/corail_security.xml',
+             'security/ir.model.access.csv',
+             
+             'view/res_partner_view.xml',
+             'view/c_device_view.xml',
+             
+             'view/portal_view.xml'
     ],
     'qweb' : [
     ],

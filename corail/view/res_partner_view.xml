@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="corail_action_partner_form" model="ir.actions.act_window">
+            <field name="name">Klienci</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{
+                					'default_customer':1,
+                					'default_is_company':1,
+                					'search_default_customer':1,                					
+                					}</field>
+            <field name="filter" eval="True"/>
+        </record>
+        
+        <menuitem id="corail_menu_service" name="Serwis" sequence="20" groups="group_corail_admin"/>
+        
+        <menuitem id="corail_menu_service_service" name="Serwis" parent="corail_menu_service" sequence="1"/>
+        
+        <menuitem action="corail_action_partner_form" id="corail_menu_service_partner" parent="corail_menu_service_service" sequence="1"/>
+        
+    </data>
+</openerp>
+

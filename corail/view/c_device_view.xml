@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- Newsletter -->
+        
+        <record id="c_device_search" model="ir.ui.view">
+            <field name="name">c.device.search</field>
+            <field name="model">c.device</field>
+            <field name="arch" type="xml">
+                <search string="Urządzenie">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="c_device_tree" model="ir.ui.view">
+            <field name="name">c.device.tree</field>
+            <field name="model">c.device</field>
+            <field name="arch" type="xml">
+                <tree string="Urządzenia">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="c_device_form" model="ir.ui.view">
+            <field name="name">c.device.form</field>
+            <field name="model">c.device</field>
+            <field name="arch" type="xml">
+                <form string="Urządzenie">
+	                <header>
+	                </header>
+	                <sheet string="Urządzenie">
+                        <div>
+	                        <label for="name" class="oe_edit_only"/>
+	                        <h1>
+	                            <field name="name" />
+	                        </h1>
+	                    </div>
+	                </sheet>
+	                <div class="oe_chatter">
+	                    <field name="message_follower_ids" widget="mail_followers"/>
+	                    <field name="message_ids" widget="mail_thread"/>
+	                </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_c_device" model="ir.actions.act_window">
+            <field name="name">Urządzenie</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">c.device</field>
+            <field name="view_type">form</field>
+	        <field name="context">{}</field>
+            <field name="view_id" ref="c_device_tree"/>
+             <field name="search_view_id" ref="c_device_search"/>
+        </record>
+		
+        <menuitem action="action_c_device" id="corail_menu_service_device" parent="corail_menu_service_service" sequence="2"/>
+    </data>
+</openerp>
