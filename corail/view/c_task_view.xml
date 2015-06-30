@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>        
+        <record id="c_task_search" model="ir.ui.view">
+            <field name="name">c.task.search</field>
+            <field name="model">c.task</field>
+            <field name="arch" type="xml">
+                <search string="Zadanie">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="c_task_tree" model="ir.ui.view">
+            <field name="name">c.task.tree</field>
+            <field name="model">c.task</field>
+            <field name="arch" type="xml">
+                <tree string="Zadania" editable="bottom">
+	                <field name="device_id" />
+	                <field name="partner_id" />
+	                <field name="name" />
+	                <field name="date_start" />
+	                <field name="date_stop" />
+	                <field name="performs" />
+	                <field name="state" />
+                </tree>
+            </field>
+        </record>
+        
+        <record id="c_task_calendar" model="ir.ui.view">
+            <field name="name">c.task.calendar</field>
+            <field name="model">c.task</field>
+            <field name="arch" type="xml">
+		        <calendar color="partner_id" date_delay="date_stop" date_start="date_start" string="Zadania">
+				    <field name="name"/>
+				    <field name="device_id"/>
+				</calendar>
+            </field>
+        </record>
+        
+        
+        <record id="action_c_task" model="ir.actions.act_window">
+            <field name="name">Zadania</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">c.task</field>
+            <field name="view_mode">tree,form,calendar</field>
+	        <field name="context">{}</field>
+            <field name="view_id" ref="c_task_tree"/>
+             <field name="search_view_id" ref="c_task_search"/>
+        </record>
+		
+        <menuitem action="action_c_task" id="corail_menu_service_task" parent="corail_menu_service_service" sequence="3"/>
+    </data>
+</openerp>

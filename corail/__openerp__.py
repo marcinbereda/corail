@@ -16,6 +16,7 @@
              
              'view/res_partner_view.xml',
              'view/c_device_view.xml',
+             'view/c_task_view.xml',
              
              'view/portal_view.xml'
     ],

@@ -4,6 +4,7 @@
         <menuitem name="Serwis" id="corail_portal_service" parent="portal.portal_menu" sequence="20" groups="base.group_portal"/>
         
         <menuitem action="action_c_device" id="corail_menu_portal_device" parent="corail_portal_service" sequence="1"/>
+        <menuitem action="action_c_task" id="corail_menu_portal_task" parent="corail_portal_service" sequence="2"/>
         
     </data>
 </openerp>

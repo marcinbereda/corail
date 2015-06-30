@@ -4,11 +4,12 @@
     <!-- Dodanie kategorii uprawnień -->
         <record model="ir.module.category" id="module_category_corail_service">
             <field name="name">Corail - uprawnienia</field>
-            <field name="sequence">2</field>
+            <field name="sequence">8</field>
         </record>
 
 	    <record id="group_corail_admin" model="res.groups">
 	        <field name="name">Corail Administrator</field>
+            <field name="comment">Corail Administrator</field>
 	        <field name="category_id" ref="module_category_corail_service"/>
 	    </record>
 	    

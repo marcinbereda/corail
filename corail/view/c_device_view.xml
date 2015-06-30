@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-        
-        <!-- Newsletter -->
-        
         <record id="c_device_search" model="ir.ui.view">
             <field name="name">c.device.search</field>
             <field name="model">c.device</field>
@@ -20,6 +17,10 @@
             <field name="arch" type="xml">
                 <tree string="Urządzenia">
                     <field name="name"/>
+                    <field name="partner_id" />
+                    <field name="serial_number" />
+                    <field name="motohours" />
+                    <field name="state" />
                 </tree>
             </field>
         </record>
@@ -30,6 +31,7 @@
             <field name="arch" type="xml">
                 <form string="Urządzenie">
 	                <header>
+	                    <field name="state" widget="statusbar" statusbar_visible="used" />
 	                </header>
 	                <sheet string="Urządzenie">
                         <div>
@@ -38,6 +40,35 @@
 	                            <field name="name" />
 	                        </h1>
 	                    </div>
+	                    <group col="2">
+	                        <group>
+	                            <field name="partner_id" />
+	                            <field name="serial_number" />
+	                            <field name="motohours" />
+	                        </group>
+	                        <group>
+	                            <field name="date_delivery" />
+	                            <field name="warranty_start" />
+	                            <field name="warranty_stop" />
+	                        </group>
+	                    </group>
+	                    <notebook>
+	                        <page string="Załączniki">
+	                            <field name="attachment_ids" widget="many2many_binary"/>
+	                        </page>
+	                        <page string="Zadania">
+	                            <field name="task_ids" context="{'default_partner_id':partner_id}">
+	                                <tree editable="bottom">
+	                                    <field name="name" />
+	                                    <field name="date_start" />
+	                                    <field name="date_stop" />
+	                                    <field name="performs" />
+	                                    <field name="state" />
+	                                    <field name="partner_id" invisible="1"/>
+	                                </tree>
+	                            </field>
+	                        </page>
+	                    </notebook>
 	                </sheet>
 	                <div class="oe_chatter">
 	                    <field name="message_follower_ids" widget="mail_followers"/>
