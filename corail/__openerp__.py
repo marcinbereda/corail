@@ -9,7 +9,7 @@
     CORAIL Service
     """,
     'website': '',
-    'depends' : ['mail'],
+    'depends' : ['mail','portal'],
     'data': [
              'security/corail_security.xml',
              'security/ir.model.access.csv',
