@@ -20,7 +20,7 @@
                     <field name="partner_id" />
                     <field name="serial_number" />
                     <field name="motohours" />
-                    <field name="state" />
+                    <!-- <field name="state" /> -->
                 </tree>
             </field>
         </record>
@@ -31,7 +31,9 @@
             <field name="arch" type="xml">
                 <form string="Urządzenie">
 	                <header>
-	                    <field name="state" widget="statusbar" statusbar_visible="used" />
+	                    <!-- <field name="state" widget="statusbar" statusbar_visible="used" /> -->
+	                    <field name="add_motohours" invisible="1" />
+	                    <button name="%(action_c_motohour_wizard)d" type="action" string="Uzupełnij motogodziny" class="oe_highlight" attrs="{'invisible': [('add_motohours','=',False)]}"/>
 	                </header>
 	                <sheet string="Urządzenie">
                         <div>
@@ -50,6 +52,7 @@
 	                            <field name="date_delivery" />
 	                            <field name="warranty_start" />
 	                            <field name="warranty_stop" />
+	                            <field name="rtime_id" />
 	                        </group>
 	                    </group>
 	                    <notebook>
@@ -64,7 +67,18 @@
 	                                    <field name="date_stop" />
 	                                    <field name="performs" />
 	                                    <field name="state" />
+						                <button name="cancelled" icon="gtk-cancel" string="Odrzuć" attrs="{'invisible': [('state','not in',['scheduled'])]}" groups="corail.group_corail_admin"/>
+                						<button name="done" icon="gtk-apply" string="Wykonaj" attrs="{'invisible': [('state','not in',['scheduled'])]}" />
 	                                    <field name="partner_id" invisible="1"/>
+	                                </tree>
+	                            </field>
+	                        </page>
+	                        <page string="Motogodziny">
+	                            <field name="motohours_ids" readonly="1">
+	                                <tree editable="bottom">
+	                                    <field name="create_uid" />
+	                                    <field name="create_date" />
+	                                    <field name="hours" />
 	                                </tree>
 	                            </field>
 	                        </page>

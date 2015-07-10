@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="c_motohour_wizard_form" model="ir.ui.view">
+            <field name="name">c.motohour.wizard.form</field>
+            <field name="model">c.motohour.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Motogodziny urządzenia">
+                    <group>
+                        <field name="hours"/>
+                    </group>
+                    <footer>
+                        <button string="Uzupełnij" name="add_motohour" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Anuluj" class="oe_link" special="cancel" />
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_c_motohour_wizard" model="ir.actions.act_window">
+            <field name="name">Motogodziny urządzenia</field>
+            <field name="res_model">c.motohour.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="c_motohour_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

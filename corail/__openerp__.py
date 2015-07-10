@@ -14,11 +14,15 @@
              'security/corail_security.xml',
              'security/ir.model.access.csv',
              
+             'wizard/c_motohour_wizard_view.xml',
+             
              'view/res_partner_view.xml',
              'view/c_device_view.xml',
              'view/c_task_view.xml',
              
-             'view/portal_view.xml'
+             'view/portal_view.xml',
+             
+             'view/c_task_workflow.xml'
     ],
     'qweb' : [
     ],

@@ -3,3 +3,9 @@ access_corail_device_admin,access.corail.device.admin,model_c_device,group_corai
 access_corail_device_portal,access.corail.device.portal,model_c_device,base.group_portal,1,0,0,0
 access_corail_task_admin,access.corail.task.admin,model_c_task,group_corail_admin,1,1,1,1
 access_corail_task_portal,access.corail.task.portal,model_c_task,base.group_portal,1,0,0,0
+access_corail_device_model_admin,access.corail.device.model.admin,model_c_device_model,group_corail_admin,1,1,1,1
+access_corail_device_model_portal,access.corail.device.model.portal,model_c_device_model,base.group_portal,1,0,0,0
+access_corail_device_motohours_admin,access.corail.device.motohours.admin,model_c_device_motohours,group_corail_admin,1,1,1,1
+access_corail_device_motohours_portal,access.corail.device.motohours.portal,model_c_device_motohours,base.group_portal,1,0,0,0
+access_corail_device_response_time_admin,access.corail.device.response.time.admin,model_c_device_response_time,group_corail_admin,1,1,1,1
+access_corail_device_response_time_portal,access.corail.device.response.time.portal,model_c_device_response_time,base.group_portal,1,0,0,0

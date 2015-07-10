@@ -2,3 +2,5 @@
 
 import c_device
 import c_task
+
+import wizard
