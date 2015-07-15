@@ -31,9 +31,10 @@
             <field name="arch" type="xml">
                 <form string="Urządzenie">
 	                <header>
-	                    <!-- <field name="state" widget="statusbar" statusbar_visible="used" /> -->
 	                    <field name="add_motohours" invisible="1" />
 	                    <button name="%(action_c_motohour_wizard)d" type="action" string="Uzupełnij motogodziny" class="oe_highlight" attrs="{'invisible': [('add_motohours','=',False)]}"/>
+	                    
+	                    <field name="state" widget="statusbar" statusbar_visible="used" />
 	                </header>
 	                <sheet string="Urządzenie">
 	                    <field name="image" widget='image' class="oe_left oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
@@ -48,6 +49,7 @@
 	                            <field name="partner_id" />
 	                            <field name="serial_number" />
 	                            <field name="motohours" />
+	                            <field name="location" />
 	                        </group>
 	                        <group>
 	                            <field name="date_delivery" />

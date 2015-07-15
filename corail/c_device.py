@@ -9,8 +9,8 @@ import calendar
 import pdb
 
 Device_State = [
-    ('used','Używane'),
-    ('unused','Nieużywane')
+    ('used','Działa poprawnie'),
+    ('unused','Zgłoszenie serwisowe')
 ]
 
 class c_device(models.Model):
@@ -85,7 +85,7 @@ class c_device(models.Model):
             self.age_device = age
     
     name = fields.Many2one('c.device.model', string='Nazwa', required=True)
-    partner_id = fields.Many2one('res.partner', string='Klient', domain=[('customer', '=', 'True'),('is_company','=',True)])
+    partner_id = fields.Many2one('res.partner', string='Klient', domain=[('customer', '=', 'True'),('is_company','=',True)], required=True)
     serial_number = fields.Char(string='Numer seryjny')
     date_delivery = fields.Date(string='Data dostawy')
     age_device = fields.Char(compute='_get_age_device', string='Wiek', store=False)
@@ -94,12 +94,13 @@ class c_device(models.Model):
     motohours = fields.Float(compute='_get_motohours', string='Motogodziny', store=False)
     add_motohours = fields.Boolean(compute='_get_motohours', string='Dodanie motogodzin', store=False)
     rtime_id = fields.Many2one('c.device.response.time', string='Czas reakcji')
-    #state = fields.Selection(Device_State, string='Jest używane', default='used')
+    state = fields.Selection(Device_State, string='Status', default='used')
     attachment_ids = fields.Many2many('ir.attachment', 'c_device_attachment_rel', 'c_device_templ_id', 'attachment_id', string='Załączniki')
     task_ids = fields.One2many('c.task', 'device_id', string='Zadania')
     motohours_ids = fields.One2many('c.device.motohours', 'device_id', string='Motogodziny')
     image = fields.Binary(string='Zdjęcie')
     description = fields.Text(string='Uwagi')
+    location = fields.Text(string='Lokalizacja')
     
     category = fields.Char(string='Kategoria')
     purpose = fields.Char(string='Przeznaczenie')
