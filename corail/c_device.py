@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from openerp import models, fields, api, _
+from openerp import models, fields, api, tools, _
 from openerp.exceptions import except_orm, Warning, RedirectWarning
 
 from dateutil.relativedelta import relativedelta
+from openerp import tools
 import datetime
 import calendar
 import pdb
@@ -99,6 +100,7 @@ class c_device(models.Model):
     task_ids = fields.One2many('c.task', 'device_id', string='Zadania')
     motohours_ids = fields.One2many('c.device.motohours', 'device_id', string='Motogodziny')
     image = fields.Binary(string='Zdjęcie')
+    
     description = fields.Text(string='Uwagi')
     location = fields.Text(string='Lokalizacja')
     
