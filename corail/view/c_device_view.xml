@@ -11,6 +11,32 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="c_device_kanban">
+            <field name="name">c.device.kanban</field>
+            <field name="model">c.device</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_vignette oe_semantic_html_override">
+								<a type="open"><img t-att-src="kanban_image('c.device', 'image', record.id.value)" class="oe_kanban_image"/></a>
+                                <div class="oe_kanban_details">
+                                    <h4 class="oe_partner_heading"><a type="open"><field name="name"/></a></h4>
+                                    <ul>
+										<li><field name="partner_id" /></li>
+										<li><field name="serial_number" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record id="c_device_tree" model="ir.ui.view">
             <field name="name">c.device.tree</field>
             <field name="model">c.device</field>
@@ -54,7 +80,6 @@
 	                        <group>
 	                            <field name="date_delivery" />
 	                            <field name="age_device" />
-	                            <field name="warranty_start" />
 	                            <field name="warranty_stop" />
 	                            <field name="rtime_id" />
 	                        </group>
@@ -79,7 +104,7 @@
 	                        
 	                        <page string="Obsługa">
 	                            <field name="task_ids" context="{'default_partner_id':partner_id}">
-	                                <tree editable="bottom">
+	                                <tree>
 	                                    <field name="name" />
 	                                    <field name="date_start" />
 	                                    <field name="date_stop" />
@@ -119,75 +144,16 @@
                 </form>
             </field>
         </record>
-        <!-- 
-        <record model="ir.ui.view" id="c_device_kanban">
-            <field name="name">c.device.kanban</field>
-            <field name="model">c.device</field>
-            <field name="arch" type="xml">
-                <kanban>
-                    <field name="color"/>
-                    <field name="display_name"/>
-                    <field name="title"/>
-                    <field name="email"/>
-                    <field name="parent_id"/>
-                    <field name="is_company"/>
-                    <field name="function"/>
-                    <field name="phone"/>
-                    <field name="street"/>
-                    <field name="street2"/>
-                    <field name="zip"/>
-                    <field name="city"/>
-                    <field name="country_id"/>
-                    <field name="mobile"/>
-                    <field name="state_id"/>
-                    <field name="category_id"/>
-                    <field name="has_image"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div class="oe_kanban_vignette oe_semantic_html_override">
-                                <a type="open">
-                                    <t t-if="record.has_image.raw_value === true">
-                                        <img t-att-src="kanban_image('res.partner', 'image_small', record.id.value)" class="oe_kanban_image"/>
-                                    </t>
-                                    <t t-if="record.has_image.raw_value === false">
-                                        <t t-if="record.is_company.raw_value === true">
-                                            <img t-att-src='_s + "/base/static/src/img/company_image.png"' class="oe_kanban_image"/>
-                                        </t>
-                                        <t t-if="record.is_company.raw_value === false">
-                                            <img t-att-src='_s + "/base/static/src/img/avatar.png"' class="oe_kanban_image"/>
-                                        </t>
-                                    </t>
-                                </a>
-                                <div class="oe_kanban_details">
-                                    <h4 class="oe_partner_heading"><a type="open"><field name="display_name"/></a></h4>
-                                    <div class="oe_kanban_partner_categories"/>
-                                    <div class="oe_kanban_partner_links"/>
-                                    <ul>
-                                        <li t-if="record.parent_id.raw_value and !record.function.raw_value"><field name="parent_id"/></li>
-                                        <li t-if="!record.parent_id.raw_value and record.function.raw_value"><field name="function"/></li>
-                                        <li t-if="record.parent_id.raw_value and record.function.raw_value"><field name="function"/> at <field name="parent_id"/></li>
-                                        <li t-if="record.city.raw_value and !record.country_id.raw_value"><field name="city"/></li>
-                                        <li t-if="!record.city.raw_value and record.country_id.raw_value"><field name="country_id"/></li>
-                                        <li t-if="record.city.raw_value and record.country_id.raw_value"><field name="city"/>, <field name="country_id"/></li>
-                                        <li t-if="record.email.raw_value"><a t-attf-href="mailto:#{record.email.raw_value}"><field name="email"/></a></li>
-                                    </ul>
-                                </div>
-                            </div>
 
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
-         -->
         <record id="action_c_device" model="ir.actions.act_window">
-            <field name="name">Urządzenie</field>
+            <field name="name">Urządzenia</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">c.device</field>
             <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
 	        <field name="context">{}</field>
-            <field name="view_id" ref="c_device_tree"/>
-             <field name="search_view_id" ref="c_device_search"/>
+            <field name="view_id" ref="c_device_kanban"/>
+            <field name="search_view_id" ref="c_device_search"/>
         </record>
 		
         <menuitem action="action_c_device" id="corail_menu_service_device" parent="corail_menu_service_service" sequence="2"/>

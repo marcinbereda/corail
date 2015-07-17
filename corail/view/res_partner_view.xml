@@ -16,6 +16,19 @@
             <field name="filter" eval="True"/>
         </record>
         
+        
+
+        <record id="c_view_partner_form" model="ir.ui.view">
+            <field name="name">c.res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Sales &amp; Purchases']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+        
         <menuitem id="corail_menu_service" name="Serwis" sequence="20" groups="group_corail_admin"/>
         
         <menuitem id="corail_menu_service_service" name="Serwis" parent="corail_menu_service" sequence="1"/>
