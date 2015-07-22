@@ -90,7 +90,6 @@ class c_device(models.Model):
     serial_number = fields.Char(string='Numer seryjny')
     date_delivery = fields.Date(string='Data odbioru')
     age_device = fields.Char(compute='_get_age_device', string='Wiek', store=False)
-    #warranty_start = fields.Date(string='Gwarancja od')
     warranty_stop = fields.Date(string='Gwaracncja do')
     motohours = fields.Float(compute='_get_motohours', string='Motogodziny', store=False)
     add_motohours = fields.Boolean(compute='_get_motohours', string='Dodanie motogodzin', store=False)
@@ -118,6 +117,8 @@ class c_device(models.Model):
     spare_parts_data = fields.Binary(string='Lista części zamiennych')
     spare_parts_name = fields.Char(string='Nazwa pliku')
     
+    calendar_ids = fields.One2many('c.service.calendar', 'device_id', string='Kalendarz obsługowy')
+    
 
 class c_device_model(models.Model):
     _name = "c.device.model"
@@ -133,6 +134,20 @@ class c_device_motohours(models.Model):
     create_date = fields.Datetime(string='Data dodania', readonly=True)
     create_uid = fields.Many2one('res.users', string='Dodał', readonly=True)
     device_id = fields.Many2one('c.device', string='Urządzenie', required=True)
+    
+Cycle = [
+    ('month','miesiąc'),
+    ('6month','6 miesięcy'),
+    ('year','rok')
+    ]
+    
+class c_service_calendar(models.Model):
+    _name = "c.service.calendar"
+    _description = "Kalendarz obsługowy"
+    
+    description = fields.Char(string='Opis')
+    device_id = fields.Many2one('c.device', string='Urządzenie', required=True)
+    cycle = fields.Selection(Cycle, string='Cykl', required=True)
     
     
 Unit_Time = [

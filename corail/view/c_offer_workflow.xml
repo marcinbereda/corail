@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="offer_wkf" model="workflow">
+            <field name="name">c.offer.basic</field>
+            <field name="osv">c.offer</field>
+            <field name="on_create">True</field>
+        </record>
+        
+        <record id="offer_draft" model="workflow.activity">
+            <field name="wkf_id" ref="offer_wkf"/>
+            <field name="flow_start">True</field>
+            <field name="name">draft</field>
+        </record>
+
+        <record id="offer_offer" model="workflow.activity">
+            <field name="wkf_id" ref="offer_wkf"/>
+            <field name="name">offer</field>
+            <field name="action">write({'state':'offer'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="offer_accept" model="workflow.activity">
+            <field name="wkf_id" ref="offer_wkf"/>
+            <field name="name">accept</field>
+            <field name="action">write({'state':'accept'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="offer_reject" model="workflow.activity">
+            <field name="wkf_id" ref="offer_wkf"/>
+            <field name="name">reject</field>
+            <field name="action">write({'state':'reject'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        
+        <record id="offer_t1" model="workflow.transition">
+            <field name="act_from" ref="offer_draft"/>
+            <field name="act_to" ref="offer_offer"/>
+            <field name="signal">offer</field>
+        </record>
+        
+        <record id="offer_t2" model="workflow.transition">
+            <field name="act_from" ref="offer_offer"/>
+            <field name="act_to" ref="offer_accept"/>
+            <field name="signal">accept</field>
+        </record>
+        
+        <record id="offer_t3" model="workflow.transition">
+            <field name="act_from" ref="offer_offer"/>
+            <field name="act_to" ref="offer_reject"/>
+            <field name="signal">reject</field>
+        </record>
+        
+    </data>
+</openerp>
