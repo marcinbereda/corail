@@ -73,6 +73,7 @@
 	                    <group col="2">
 	                        <group>
 	                            <field name="partner_id" />
+	                            <field name="user" />
 	                            <field name="serial_number" />
 	                            <field name="motohours" />
 	                            <field name="location" />
@@ -127,6 +128,14 @@
 	                        </page>
 	                        
 	                        <page string="Zgłoszenia">
+	                            <field name="flaw_ids" readonly="1">
+	                                <tree>
+	                                    <field name="create_uid" string="Zgłosił" />
+	                                    <field name="create_date" string="Data zgłoszenia" />
+	                                    <field name="description" />
+	                                    <field name="state" />
+	                                </tree>
+	                            </field>
 	                        </page>
 	                        
 	                        <page string="Historia">
@@ -155,7 +164,7 @@
         </record>
 
         <record id="action_c_device" model="ir.actions.act_window">
-            <field name="name">Urządzenia</field>
+            <field name="name">Sprzęt</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">c.device</field>
             <field name="view_type">form</field>
@@ -164,7 +173,132 @@
             <field name="view_id" ref="c_device_kanban"/>
             <field name="search_view_id" ref="c_device_search"/>
         </record>
-		
-        <menuitem action="action_c_device" id="corail_menu_service_device" parent="corail_menu_service_service" sequence="2"/>
+        
+        <record id="c_device_flaw_search" model="ir.ui.view">
+            <field name="name">c.device.flaw.search</field>
+            <field name="model">c.device.flaw</field>
+            <field name="arch" type="xml">
+                <search string="Usterka">
+                    <field name="device_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="c_device_flaw_tree" model="ir.ui.view">
+            <field name="name">c.device.flaw.tree</field>
+            <field name="model">c.device.flaw</field>
+            <field name="arch" type="xml">
+                <tree string="Usterka">
+                    <field name="device_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="c_device_flaw_form" model="ir.ui.view">
+            <field name="name">c.device.flaw.form</field>
+            <field name="model">c.device.flaw</field>
+            <field name="arch" type="xml">
+                <form string="Usterka">
+	                <header>
+	                    <field name="state" widget="statusbar" statusbar_visible="new" />
+	                </header>
+	                <sheet string="Urządzenie">
+						<group>
+						    <group>
+						        <field name="partner_id" />
+						        <field name="device_id" />
+						    </group>
+						    <group>
+						        
+						    </group>
+						</group>
+						<group>
+                            <field name="description" />
+                            <field name="attachment_ids" widget="many2many_binary"/>
+						</group>
+	                </sheet>
+	                <div class="oe_chatter">
+	                    <field name="message_follower_ids" widget="mail_followers"/>
+	                    <field name="message_ids" widget="mail_thread"/>
+	                </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_c_device_flaw" model="ir.actions.act_window">
+            <field name="name">Zgłoszenia usterek</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">c.device.flaw</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	        <field name="context">{}</field>
+            <field name="search_view_id" ref="c_device_flaw_search"/>
+        </record>
+        
+        <!-- Czas reakcji -->
+        
+        <record id="c_device_response_time_search" model="ir.ui.view">
+            <field name="name">c.device.response.time.search</field>
+            <field name="model">c.device.response.time</field>
+            <field name="arch" type="xml">
+                <search string="Czas">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="c_device_response_time_tree" model="ir.ui.view">
+            <field name="name">c.device.response.time.tree</field>
+            <field name="model">c.device.response.time</field>
+            <field name="arch" type="xml">
+                <tree string="Czas reakcji" editable="bottom">
+                    <field name="name"/>
+                    <field name="unit"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_c_device_response_time" model="ir.actions.act_window">
+            <field name="name">Czasy reakcji</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">c.device.response.time</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	        <field name="context">{}</field>
+            <field name="search_view_id" ref="c_device_response_time_search"/>
+        </record>
+        
+        
+        <!-- Model urządzenia -->
+        
+        <record id="c_device_model_search" model="ir.ui.view">
+            <field name="name">c.device.model.search</field>
+            <field name="model">c.device.model</field>
+            <field name="arch" type="xml">
+                <search string="Model">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="c_device_model_tree" model="ir.ui.view">
+            <field name="name">c.device.model.tree</field>
+            <field name="model">c.device.model</field>
+            <field name="arch" type="xml">
+                <tree string="Model" editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_c_device_model" model="ir.actions.act_window">
+            <field name="name">Modele sprzętu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">c.device.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+	        <field name="context">{}</field>
+            <field name="search_view_id" ref="c_device_model_search"/>
+        </record>
     </data>
 </openerp>

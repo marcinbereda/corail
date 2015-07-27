@@ -131,7 +131,7 @@
         </record>
 
         <record id="action_c_task" model="ir.actions.act_window">
-            <field name="name">Zadania</field>
+            <field name="name">Zadania obsługowe</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">c.task</field>
             <field name="view_mode">tree,form</field>
@@ -139,18 +139,14 @@
             <field name="view_id" ref="c_task_tree"/>
             <field name="search_view_id" ref="c_task_search"/>
         </record>
-		
-        <menuitem action="action_c_task" id="corail_menu_service_task" parent="corail_menu_service_service" sequence="3"/>
         
         <record id="action_c_task_calendar" model="ir.actions.act_window">
-            <field name="name">Kalendarz</field>
+            <field name="name">Kalendarz obsługowy</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">c.task</field>
             <field name="view_mode">calendar,tree,form</field>
 	        <field name="context">{}</field>
             <field name="search_view_id" ref="c_task_search"/>
         </record>
-		
-        <menuitem action="action_c_task_calendar" id="corail_menu_service_task_calendar" parent="corail_menu_service_service" sequence="4"/>
     </data>
 </openerp>

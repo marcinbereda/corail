@@ -99,6 +99,7 @@ class c_device(models.Model):
     task_ids = fields.One2many('c.task', 'device_id', string='Zadania')
     motohours_ids = fields.One2many('c.device.motohours', 'device_id', string='Motogodziny')
     image = fields.Binary(string='Zdjęcie')
+    user = fields.Many2one('res.partner', string='Osoba odpowiedzialna', domain="[('parent_id','=',partner_id)]")
     
     description = fields.Text(string='Uwagi')
     location = fields.Text(string='Lokalizacja')
@@ -118,13 +119,19 @@ class c_device(models.Model):
     spare_parts_name = fields.Char(string='Nazwa pliku')
     
     calendar_ids = fields.One2many('c.service.calendar', 'device_id', string='Kalendarz obsługowy')
+    flaw_ids = fields.One2many('c.device.flaw', 'device_id', string='Zgłoszenia')
     
+class c_subdevice(models.Model):
+    _name = "c.subdevice"
+    _description = "Podurządzenie"
+    
+    name = fields.Char(string='Model', required=True)
 
 class c_device_model(models.Model):
     _name = "c.device.model"
     _description = "Model urządzenia"
     
-    name = fields.Char(string='Model')
+    name = fields.Char(string='Model', required=True)
     
 class c_device_motohours(models.Model):
     _name = "c.device.motohours"
@@ -172,3 +179,24 @@ class c_device_response_time(models.Model):
         for rt in self:
             result.append((rt.id, "%s %s" % (rt.name, Unit_Time[rt.unit.encode('utf-8')])))
         return result
+    
+    
+Flaw_State = [
+    ('new','Nowe'),
+    ('in_progress','Rozpatrywane'),
+    ('servis','Serwis'),
+    ('close','Zamknięte')
+]
+    
+class c_device_flaw(models.Model):
+    _name = "c.device.flaw"
+    _description = "Usterka"
+    _inherit = ['mail.thread']
+    
+    partner_id = fields.Many2one('res.partner', string='Klient', required=True, domain="[('customer', '=', 'True'),('is_company','=',True)]")
+    device_id = fields.Many2one('c.device', string='Urządzenie', required=True, domain="[('partner_id', '=', partner_id)]")
+    description = fields.Text(string='Opis usterki', required=True)
+    attachment_ids = fields.Many2many('ir.attachment', 'c_device_flaw_attachment_rel', 'c_device_flaw_id', 'attachment_id', string='Załączniki')
+    state = fields.Selection(Flaw_State, string='Status', default='new')
+    
+    

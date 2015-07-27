@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <menuitem id="corail_menu_service" name="Obsługa techniczna" sequence="20" groups="group_corail_admin"/>
+        	<menuitem id="corail_menu_service_service" name="Obsługa techniczna" parent="corail_menu_service" sequence="1"/>
+		        <menuitem action="corail_action_partner_form" id="corail_menu_service_partner" parent="corail_menu_service_service" sequence="1"/>
+	        	<menuitem action="action_c_device" id="corail_menu_service_device" parent="corail_menu_service_service" sequence="2"/>
+	        	<menuitem action="action_c_task" id="corail_menu_service_task" parent="corail_menu_service_service" sequence="3"/>
+	        	<menuitem action="action_c_task_calendar" id="corail_menu_service_task_calendar" parent="corail_menu_service_service" sequence="4"/>
+	        	<menuitem action="action_c_device_flaw" id="corail_menu_service_flaw" parent="corail_menu_service_service" sequence="5"/>
+				<menuitem action="action_c_offer" id="corail_menu_service_offer" parent="corail_menu_service_service" sequence="6"/>
+			
+        	<menuitem id="corail_menu_service_config" name="Zarządzanie" parent="corail_menu_service" sequence="2"/>
+		        <menuitem action="action_c_device_response_time" id="corail_menu_service_config_response_time" parent="corail_menu_service_config" sequence="1"/>
+		        <menuitem action="action_c_device_model" id="corail_menu_service_config_model" parent="corail_menu_service_config" sequence="2"/>
+    </data>
+</openerp>

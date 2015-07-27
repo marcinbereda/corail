@@ -24,7 +24,10 @@
              'view/portal_view.xml',
              
              'view/c_task_workflow.xml',
-             'view/c_offer_workflow.xml'
+             'view/c_offer_workflow.xml',
+             
+             'view/webclient_templates.xml',
+             'view/menu_view.xml'
     ],
     'qweb' : [
     ],

@@ -61,7 +61,5 @@
             <field name="view_id" ref="c_offer_tree"/>
             <field name="search_view_id" ref="c_offer_search"/>
         </record>
-		
-        <menuitem action="action_c_offer" id="corail_menu_service_offer" parent="corail_menu_service_service" sequence="5"/>
     </data>
 </openerp>
