@@ -17,14 +17,16 @@
         <record id="task_cancelled" model="workflow.activity">
             <field name="wkf_id" ref="task_wkf"/>
             <field name="name">cancelled</field>
-            <field name="action">write({'state':'cancelled'})</field>
+            <field name="action">write({'state':'cancelled'})
+                cancel_flaw()</field>
             <field name="kind">function</field>
         </record>
         
         <record id="task_done" model="workflow.activity">
             <field name="wkf_id" ref="task_wkf"/>
             <field name="name">done</field>
-            <field name="action">write({'state':'done'})</field>
+            <field name="action">write({'state':'done'})
+                cancel_flaw()</field>
             <field name="kind">function</field>
         </record>
         

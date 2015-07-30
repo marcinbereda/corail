@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="flaw_wkf" model="workflow">
+            <field name="name">c.device.flaw.basic</field>
+            <field name="osv">c.device.flaw</field>
+            <field name="on_create">True</field>
+        </record>
+        
+        <record id="flaw_new" model="workflow.activity">
+            <field name="wkf_id" ref="flaw_wkf"/>
+            <field name="flow_start">True</field>
+            <field name="name">new</field>
+        </record>
+
+        <record id="flaw_in_progress" model="workflow.activity">
+            <field name="wkf_id" ref="flaw_wkf"/>
+            <field name="name">in_progress</field>
+            <field name="action">write({'state':'in_progress'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="flaw_service" model="workflow.activity">
+            <field name="wkf_id" ref="flaw_wkf"/>
+            <field name="name">service</field>
+            <field name="action">write({'state':'service'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="flaw_close" model="workflow.activity">
+            <field name="wkf_id" ref="flaw_wkf"/>
+            <field name="name">close</field>
+            <field name="action">write({'state':'close'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="flaw_t1" model="workflow.transition">
+            <field name="act_from" ref="flaw_new"/>
+            <field name="act_to" ref="flaw_in_progress"/>
+            <field name="signal">in_progress</field>
+        </record>
+        
+        <record id="flaw_t2" model="workflow.transition">
+            <field name="act_from" ref="flaw_in_progress"/>
+            <field name="act_to" ref="flaw_service"/>
+            <field name="signal">service</field>
+        </record>
+        
+        <record id="flaw_t3" model="workflow.transition">
+            <field name="act_from" ref="flaw_service"/>
+            <field name="act_to" ref="flaw_close"/>
+            <field name="signal">close</field>
+        </record>
+
+    </data>
+</openerp>

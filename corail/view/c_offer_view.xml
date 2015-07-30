@@ -8,6 +8,10 @@
                 <search string="Oferta">
                     <field name="partner_id"/>
                     <field name="description" />
+                    <group expand="0" string="Pogrupuj wg">
+                    	<filter string="Partner" context="{'group_by':'partner_id'}"/>
+                        <filter string="Status" context="{'group_by':'state'}"/>
+                    </group>
                 </search>
             </field>
         </record>

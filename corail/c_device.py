@@ -90,7 +90,7 @@ class c_device(models.Model):
     serial_number = fields.Char(string='Numer seryjny')
     date_delivery = fields.Date(string='Data odbioru')
     age_device = fields.Char(compute='_get_age_device', string='Wiek', store=False)
-    warranty_stop = fields.Date(string='Gwaracncja do')
+    warranty_stop = fields.Date(string='Gwarancja do')
     motohours = fields.Float(compute='_get_motohours', string='Motogodziny', store=False)
     add_motohours = fields.Boolean(compute='_get_motohours', string='Dodanie motogodzin', store=False)
     rtime_id = fields.Many2one('c.device.response.time', string='Czas reakcji')
@@ -100,6 +100,8 @@ class c_device(models.Model):
     motohours_ids = fields.One2many('c.device.motohours', 'device_id', string='Motogodziny')
     image = fields.Binary(string='Zdjęcie')
     user = fields.Many2one('res.partner', string='Osoba odpowiedzialna', domain="[('parent_id','=',partner_id)]")
+    main_subdevice_id = fields.Many2one('c.subdevice', string='Nadrzędne urządzenie', required=True)
+    subdevice_id = fields.Many2one('c.subdevice', string='Podrzędne urządzenie')
     
     description = fields.Text(string='Uwagi')
     location = fields.Text(string='Lokalizacja')
@@ -118,14 +120,115 @@ class c_device(models.Model):
     spare_parts_data = fields.Binary(string='Lista części zamiennych')
     spare_parts_name = fields.Char(string='Nazwa pliku')
     
+    category2 = fields.Char(string='Kategoria')
+    purpose2 = fields.Char(string='Przeznaczenie')
+    specifications2 = fields.Text(string='Charakretystyczne parametry techniczne')
+    permissions2 = fields.Text(string='Wymagane uprawnienia')
+    
+    tecnical_doc_data2 = fields.Binary(string='Dokumentacja techniczno-ruchowa')
+    tecnical_doc_name2 = fields.Char(string='Nazwa pliku')
+    user_manual_data2 = fields.Binary(string='Instrukcja użytkownika')
+    user_manual_name2 = fields.Char(string='Nazwa pliku')
+    maint_manual_data2 = fields.Binary(string='Instrukcja konserwacji')
+    maint_manual_name2 = fields.Char(string='Nazwa pliku')
+    spare_parts_data2 = fields.Binary(string='Lista części zamiennych')
+    spare_parts_name2 = fields.Char(string='Nazwa pliku')
+    
     calendar_ids = fields.One2many('c.service.calendar', 'device_id', string='Kalendarz obsługowy')
     flaw_ids = fields.One2many('c.device.flaw', 'device_id', string='Zgłoszenia')
+    
+    @api.multi
+    def onchange_main_subdevice(self, main_sub_id, subdevice_id):
+        if not main_sub_id:
+            return True
+        
+        sub_id = self.env['c.subdevice'].browse(main_sub_id)
+        sub2_id = self.env['c.subdevice'].browse(subdevice_id)
+        value = {}
+        
+        calendar = []
+        for cal in sub_id.calendar_ids:
+            calendar.append([0,False,{'cycle': cal.cycle, 'description': cal.description}])
+        for cal2 in sub2_id.calendar_ids:
+            calendar.append([0,False,{'cycle': cal2.cycle, 'description': cal2.description}])
+        
+        value = {
+                 'image': sub_id.image or False,
+                 'category': sub_id.category or '',
+                 'purpose': sub_id.purpose or '',
+                 'specifications': sub_id.specifications or '',
+                 'permissions': sub_id.permissions or '',
+                 
+                 'tecnical_doc_data': sub_id.tecnical_doc_data or False,
+                 'tecnical_doc_name': sub_id.tecnical_doc_name or '',
+                 'user_manual_data': sub_id.user_manual_data or False,
+                 'user_manual_name': sub_id.user_manual_name or '',
+                 'maint_manual_data': sub_id.maint_manual_data or False,
+                 'maint_manual_name': sub_id.maint_manual_name or '',
+                 'spare_parts_data': sub_id.spare_parts_data or False,
+                 'spare_parts_name': sub_id.spare_parts_name or '',
+                 'calendar_ids': calendar
+                 }
+
+        return {'value': value}
+    
+    @api.multi
+    def onchange_subdevice(self, main_sub_id, subdevice_id):
+        if not subdevice_id:
+            return True
+        
+        sub_id = self.env['c.subdevice'].browse(subdevice_id)
+        sub2_id = self.env['c.subdevice'].browse(main_sub_id)
+        value = {}
+        
+        calendar = []
+        for cal in sub_id.calendar_ids:
+            calendar.append([0,False,{'cycle': cal.cycle, 'description': cal.description}])
+        for cal2 in sub2_id.calendar_ids:
+            calendar.append([0,False,{'cycle': cal2.cycle, 'description': cal2.description}])
+        
+        value = {
+                 'category2': sub_id.category or '',
+                 'purpose2': sub_id.purpose or '',
+                 'specifications2': sub_id.specifications or '',
+                 'permissions2': sub_id.permissions or '',
+                 
+                 'tecnical_doc_data2': sub_id.tecnical_doc_data or False,
+                 'tecnical_doc_name2': sub_id.tecnical_doc_name or '',
+                 'user_manual_data2': sub_id.user_manual_data or False,
+                 'user_manual_name2': sub_id.user_manual_name or '',
+                 'maint_manual_data2': sub_id.maint_manual_data or False,
+                 'maint_manual_name2': sub_id.maint_manual_name or '',
+                 'spare_parts_data2': sub_id.spare_parts_data or False,
+                 'spare_parts_name2': sub_id.spare_parts_name or '',
+                 'calendar_ids': calendar
+                 }
+
+        return {'value': value}
+    
     
 class c_subdevice(models.Model):
     _name = "c.subdevice"
     _description = "Podurządzenie"
+    _inherit = ['mail.thread']
     
     name = fields.Char(string='Model', required=True)
+    image = fields.Binary(string='Zdjęcie')
+    category = fields.Char(string='Kategoria')
+    purpose = fields.Char(string='Przeznaczenie')
+    specifications = fields.Text(string='Charakretystyczne parametry techniczne')
+    permissions = fields.Text(string='Wymagane uprawnienia')
+    
+    tecnical_doc_data = fields.Binary(string='Dokumentacja techniczno-ruchowa')
+    tecnical_doc_name = fields.Char(string='Nazwa pliku')
+    user_manual_data = fields.Binary(string='Instrukcja użytkownika')
+    user_manual_name = fields.Char(string='Nazwa pliku')
+    maint_manual_data = fields.Binary(string='Instrukcja konserwacji')
+    maint_manual_name = fields.Char(string='Nazwa pliku')
+    spare_parts_data = fields.Binary(string='Lista części zamiennych')
+    spare_parts_name = fields.Char(string='Nazwa pliku')
+    
+    calendar_ids = fields.One2many('c.service.calendar', 'device_id', string='Kalendarz obsługowy')
 
 class c_device_model(models.Model):
     _name = "c.device.model"
@@ -152,7 +255,7 @@ class c_service_calendar(models.Model):
     _name = "c.service.calendar"
     _description = "Kalendarz obsługowy"
     
-    description = fields.Char(string='Opis')
+    description = fields.Char(string='Opis', required=True)
     device_id = fields.Many2one('c.device', string='Urządzenie', required=True)
     cycle = fields.Selection(Cycle, string='Cykl', required=True)
     
@@ -184,7 +287,7 @@ class c_device_response_time(models.Model):
 Flaw_State = [
     ('new','Nowe'),
     ('in_progress','Rozpatrywane'),
-    ('servis','Serwis'),
+    ('service','Serwis'),
     ('close','Zamknięte')
 ]
     
@@ -192,11 +295,13 @@ class c_device_flaw(models.Model):
     _name = "c.device.flaw"
     _description = "Usterka"
     _inherit = ['mail.thread']
+    _rec_name = 'device_id'
     
     partner_id = fields.Many2one('res.partner', string='Klient', required=True, domain="[('customer', '=', 'True'),('is_company','=',True)]")
     device_id = fields.Many2one('c.device', string='Urządzenie', required=True, domain="[('partner_id', '=', partner_id)]")
     description = fields.Text(string='Opis usterki', required=True)
     attachment_ids = fields.Many2many('ir.attachment', 'c_device_flaw_attachment_rel', 'c_device_flaw_id', 'attachment_id', string='Załączniki')
-    state = fields.Selection(Flaw_State, string='Status', default='new')
+    task_id = fields.Many2one('c.task', string='Zadanie')
+    state = fields.Selection(Flaw_State, string='Status', default='new', track_visibility='onchange')
     
     

@@ -6,7 +6,14 @@
             <field name="model">c.task</field>
             <field name="arch" type="xml">
                 <search string="Zadanie">
-                    <field name="name"/>
+                    <field name="name" />
+                    <field name="device_id" />
+                    <field name="partner_id" />
+                    <group expand="0" string="Pogrupuj wg">
+                    	<filter string="Partner" context="{'group_by':'partner_id'}"/>
+                        <filter string="Urządzenie" context="{'group_by':'device_id'}"/>
+                        <filter string="Status" context="{'group_by':'state'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -53,6 +60,7 @@
 	                        <group>
 	                            <field name="date_start" />
 	                            <field name="date_stop" />
+	                            <field name="flaw_id" attrs="{'invisible': [('flaw_id','=',False)]}"/>
 	                        </group>
 	                    </group>
 	                    <label for="description" />

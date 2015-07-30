@@ -11,7 +11,29 @@
 				<menuitem action="action_c_offer" id="corail_menu_service_offer" parent="corail_menu_service_service" sequence="6"/>
 			
         	<menuitem id="corail_menu_service_config" name="Zarządzanie" parent="corail_menu_service" sequence="2"/>
-		        <menuitem action="action_c_device_response_time" id="corail_menu_service_config_response_time" parent="corail_menu_service_config" sequence="1"/>
+	        	<menuitem action="action_c_subdevice" id="corail_menu_service_subdevice" parent="corail_menu_service_config" sequence="1"/>
 		        <menuitem action="action_c_device_model" id="corail_menu_service_config_model" parent="corail_menu_service_config" sequence="2"/>
+		        <menuitem action="action_c_device_response_time" id="corail_menu_service_config_response_time" parent="corail_menu_service_config" sequence="3"/>
+        
+        <menuitem id="corail_menu_contract_service" name="Umowy serwisowe" sequence="21"/>
+        	<menuitem id="corail_menu_contracts" name="Umowy serwisowe" parent="corail_menu_contract_service" sequence="1"/>
+		        <menuitem action="action_c_empty" id="corail_menu_contract" parent="corail_menu_contracts" sequence="1" name="Umowy"/>
+        
+        <menuitem id="corail_menu_broken_part" name="Części zamienne" sequence="22"/>
+        	<menuitem id="corail_menu_part" name="Części zamienne" parent="corail_menu_broken_part" sequence="1"/>
+		        <menuitem action="action_c_empty" id="corail_menu_parts" parent="corail_menu_part" sequence="1" name="Części"/>
+        
+        <menuitem id="corail_menu_stock" name="Magazyn" sequence="23"/>
+        	<menuitem id="corail_menu_stock_stock" name="Magazyn" parent="corail_menu_stock" sequence="1"/>
+		        <menuitem action="action_c_empty" id="corail_menu_stocks" parent="corail_menu_stock_stock" sequence="1" name="Magazyn"/>
+        
+        <menuitem id="corail_menu_localization" name="Lokalizacja" sequence="24"/>
+        	<menuitem id="corail_menu_localization_loc" name="Lokalizacja" parent="corail_menu_localization" sequence="1"/>
+		        <menuitem action="action_c_empty" id="corail_menu_loc" parent="corail_menu_localization_loc" sequence="1" name="Lokalizacja"/>
+        
+        <menuitem id="corail_menu_statistic" name="Statystyki" sequence="25"/>
+        	<menuitem id="corail_menu_statistic_stat" name="Statystyki" parent="corail_menu_statistic" sequence="1"/>
+		        <menuitem action="action_c_empty" id="corail_menu_stat" parent="corail_menu_statistic_stat" sequence="1" name="Statystyki"/>
+		 
     </data>
 </openerp>

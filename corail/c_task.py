@@ -34,3 +34,9 @@ class c_task(models.Model):
     
     manual_data = fields.Binary(string='Procedura szczegółowa')
     manual_name = fields.Char(string='Nazwa pliku')
+    flaw_id = fields.Many2one('c.device.flaw', string='Usterka')
+    
+    @api.multi
+    def cancel_flaw(self):
+        if self.flaw_id:
+            self.flaw_id.signal_workflow('close')
