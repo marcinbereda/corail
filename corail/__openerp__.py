@@ -16,6 +16,7 @@
              
              'wizard/c_motohour_wizard_view.xml',
              'wizard/c_flaw2task_view.xml',
+             'wizard/c_add_flaw_view.xml',
              
              'view/res_partner_view.xml',
              'view/c_device_view.xml',

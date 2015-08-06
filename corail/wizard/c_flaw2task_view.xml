@@ -42,7 +42,7 @@
 	                </sheet>
                     <footer>
                         <button string="Utwórz" name="create_task" type="object" class="oe_highlight"/>
-                        or
+                        lub
                         <button string="Anuluj" class="oe_link" special="cancel" />
                     </footer>
                </form>

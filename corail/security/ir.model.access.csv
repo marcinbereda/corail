@@ -15,6 +15,7 @@ access_corail_offer_admin,access.corail.offer.admin,model_c_offer,group_corail_a
 access_corail_offer_portal,access.corail.offer.portal,model_c_offer,base.group_portal,1,0,0,0
 access_corail_empty,access.corail.empty,model_c_empty,,1,0,0,0
 access_corail_device_flaw_admin,access.corail.device.flaw.admin,model_c_device_flaw,group_corail_admin,1,1,1,1
-access_corail_device_flaw_portal,access.corail.device.flaw.portal,model_c_device_flaw,base.group_portal,1,0,0,0
+access_corail_device_flaw_portal,access.corail.device.flaw.portal,model_c_device_flaw,base.group_portal,1,1,1,0
 access_corail_subdevice_admin,access.corail.subdevice.admin,model_c_subdevice,group_corail_admin,1,1,1,1
 access_corail_subdevice_portal,access.corail.subdevice.portal,model_c_subdevice,base.group_portal,1,0,0,0
+access_res_partner_portal,access.res.partner.portal,base.model_res_partner,base.group_portal,1,0,0,0

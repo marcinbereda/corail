@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="c_add_flaw_form" model="ir.ui.view">
+            <field name="name">c.add.flaw.form</field>
+            <field name="model">c.add.flaw</field>
+            <field name="arch" type="xml">
+                <form string="Usterka">
+	                <header>
+	                    <field name="state" widget="statusbar" statusbar_visible="new" />
+	                </header>
+	                <sheet string="Urządzenie">
+						<group>
+						    <group>
+						        <field name="partner_id" readonly="1"/>
+						        <field name="device_id" />
+						    </group>
+						    <group>
+						    </group>
+						</group>
+						<group>
+                            <field name="description" />
+                            <field name="attachment_ids" widget="many2many_binary"/>
+						</group>
+	                </sheet>
+                    <footer>
+                        <button string="Zgłoś" name="add_flaw" type="object" class="oe_highlight"/>
+                        lub
+                        <button string="Anuluj" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_c_add_flaw" model="ir.actions.act_window">
+            <field name="name">Zgłoś usterkę</field>
+            <field name="res_model">c.add.flaw</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="c_add_flaw_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>
