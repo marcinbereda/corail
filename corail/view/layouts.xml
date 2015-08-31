@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="layouts" inherit_id="web.assets_backend">
+		    <xpath expr="." position="inside">
+            	<link rel="stylesheet" href="/corail/static/src/css/corail.css"/>
+		    </xpath>
+        </template>
+	</data>
+</openerp>

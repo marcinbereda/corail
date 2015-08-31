@@ -11,7 +11,7 @@
                     <field name="partner_id" />
                     <group expand="0" string="Pogrupuj wg">
                     	<filter string="Partner" context="{'group_by':'partner_id'}"/>
-                        <filter string="Urządzenie" context="{'group_by':'device_id'}"/>
+                        <filter string="Urządzenie" context="{'group_by':'device_id'}" name="groupby_device"/>
                         <filter string="Status" context="{'group_by':'state'}"/>
                     </group>
                 </search>
@@ -137,13 +137,24 @@
 				</calendar>
             </field>
         </record>
+        
+        <record id="c_task_calendar_portal" model="ir.ui.view">
+            <field name="name">c.task.calendar</field>
+            <field name="model">c.task</field>
+            <field name="arch" type="xml">
+		        <calendar color="device_id" date_stop="date_stop" date_start="date_start" string="Zadania" event_open_popup="%(c_task_calendar_form)s">
+				    <field name="name"/>
+				    <field name="device_id"/>
+				</calendar>
+            </field>
+        </record>
 
         <record id="action_c_task" model="ir.actions.act_window">
             <field name="name">Zadania obsługowe</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">c.task</field>
             <field name="view_mode">tree,form</field>
-	        <field name="context">{}</field>
+	        <field name="context">{'search_default_groupby_device': 1}</field>
             <field name="view_id" ref="c_task_tree"/>
             <field name="search_view_id" ref="c_task_search"/>
         </record>
@@ -154,6 +165,17 @@
             <field name="res_model">c.task</field>
             <field name="view_mode">calendar,tree,form</field>
 	        <field name="context">{}</field>
+            <field name="view_id" ref="c_task_calendar"/>
+            <field name="search_view_id" ref="c_task_search"/>
+        </record>
+        
+        <record id="action_c_task_calendar_portal" model="ir.actions.act_window">
+            <field name="name">Kalendarz obsługowy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">c.task</field>
+            <field name="view_mode">calendar,tree,form</field>
+	        <field name="context">{}</field>
+            <field name="view_id" ref="c_task_calendar_portal"/>
             <field name="search_view_id" ref="c_task_search"/>
         </record>
     </data>

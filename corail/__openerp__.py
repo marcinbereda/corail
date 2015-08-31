@@ -31,7 +31,8 @@
              'view/c_empty_view.xml',
              
              'view/webclient_templates.xml',
-             'view/menu_view.xml'
+             'view/menu_view.xml',
+             'view/layouts.xml'
     ],
     'qweb' : [
     ],

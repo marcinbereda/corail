@@ -1,0 +1,59 @@
+.navbar-inverse{
+	background-color: #0094da !important;
+	border-color: #0094da !important;
+	color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+	color: white !important;
+}
+
+.openerp .oe_leftbar > div .oe_footer, .openerp .oe_leftbar{
+	background: none !important;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
+	background-color: white !important;
+	color: #675241 !important;
+}
+
+.openerp .nav-pills > li.active > a, .openerp a.list-group-item.active > a{
+	background-color: #e0e0e0 !important;
+}
+
+.openerp .oe_secondary_menu_section{
+	color: #51566a !important;
+}
+
+.openerp button.oe_highlight{
+	background-color: #0094da !important;
+	background-image: linear-gradient(to bottom, #0094da, #0094da) !important;
+}
+
+.openerp .oe_application a {
+    color: #3e8fc7 !important;
+}
+
+.openerp .oe_tag_dark {
+    background: #0194da !important;
+}
+
+.openerp .oe_view_manager table.oe_view_manager_header .oe_button_group .active a {
+    color: #fff !important;
+}
+
+table.oe_view_manager_header .oe_button_group a {
+    color: #4c4c4c !important;
+}
+
+.openerp .oe_pager_group a {
+    color: #4c4c4c !important;
+}
+
+.openerp .oe_mail .oe_msg .oe_msg_icons a {
+    color: #FFF !important;
+}
+
+.openerp .oe_mail .oe_msg {
+    background: #e0e0e0;
+}

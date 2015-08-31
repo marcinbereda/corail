@@ -101,7 +101,7 @@
 	                            <field name="date_delivery" />
 	                            <field name="age_device" />
 	                            <field name="warranty_stop" />
-	                            <field name="rtime_id" />
+	                            <field name="rtime_id" groups="corail.group_corail_admin"/>
 	                        </group>
 	                    </group>
 	                    <notebook>

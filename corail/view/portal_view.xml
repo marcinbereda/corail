@@ -6,7 +6,7 @@
 	        
 	        <menuitem action="action_c_device" id="corail_menu_portal_device" parent="corail_portal_service" sequence="1"/>
 	        <menuitem action="action_c_task" id="corail_menu_portal_task" parent="corail_portal_service" sequence="2"/>
-	        <menuitem action="action_c_task_calendar" id="corail_menu_portal_task_calendar" parent="corail_portal_service" sequence="3"/>
+	        <menuitem action="action_c_task_calendar_portal" id="corail_menu_portal_task_calendar" parent="corail_portal_service" sequence="3"/>
 	        <menuitem action="action_c_offer" id="corail_menu_portal_offer" parent="corail_portal_service" sequence="4"/>
 	        <menuitem action="action_c_add_flaw" id="corail_menu_portal_add_flaw" parent="corail_portal_service" sequence="5"/>
 	        <menuitem action="action_c_device_flaw_portal" id="corail_menu_portal_flaw" parent="corail_portal_service" sequence="6"/>
